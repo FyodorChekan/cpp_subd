@@ -5,26 +5,20 @@
 
 using namespace std;
 
-void Sorting(int s, int* arr) {
-	for (int i = 0; i < s; i++) {
-		arr[i] = arr[i] * 3;
-	}
-}
+/*	\brief Р¤СѓРЅРєС†РёСЏ РІРІРѕРґР° СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°
+*	\return Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+*/
+int EnterSize();
+
+/*	\brief Р¤СѓРЅРєС†РёСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РјР°СЃСЃРёРІР° (СѓРјРЅРѕР¶РµРЅРёРµ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅР° 3)
+*	\param s Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+*	\param arr РЎРѕСЂС‚РёСЂСѓРµРјС‹Р№ РјР°СЃСЃРёРІ
+*	\return РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ
+*/
+void Sorting(int s, int* arr);
 
 int main() {
-	cout << "Enter size: ";
-	int s;
-	try {
-		cin >> s;
-		if (s <= 0) {
-			throw out_of_range("Неправильно введен размер массива");
-		}
-	}
-	catch (out_of_range& e) {
-		cerr << e.what();
-		return 1000;
-	}
-	
+    int s = EnterSize();
 
 	cout << "Enter minimum value:";
 	int minValue;
@@ -35,9 +29,9 @@ int main() {
 	cin >> maxValue;
 
 	random_device rd;
-	mt19937 gen(rd()); // Генератор случайных чисел
+	mt19937 gen(rd());
 
-	const uniform_int_distribution<int> uniformIntDistribution(minValue, maxValue); // Границы для случайного числа
+	uniform_int_distribution<int> uniformIntDistribution(minValue, maxValue);
 
 	int* arr = new int[s];
 
@@ -66,4 +60,26 @@ int main() {
 	delete[] arr;
 
 	return 0;
+}
+
+int EnterSize() {
+    cout << "Enter size: ";
+    int s;
+    try {
+        cin >> s;
+        if (s <= 0) {
+            throw out_of_range("Size can't be less than 0");
+        }
+    }
+    catch (out_of_range &e) {
+        cerr << e.what();
+        return 1000;
+    }
+    return s;
+}
+
+void Sorting(int s, int* arr) {
+    for (int i = 0; i < s; i++) {
+        arr[i] = arr[i] * 3;
+    }
 }
