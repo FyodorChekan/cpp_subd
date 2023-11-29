@@ -5,20 +5,44 @@
 
 using namespace std;
 
-/*	\brief Функция ввода размера массива
-*	\return Размер массива
+/**
+*@brief Функция ввода размера массива
+*@return Размер массива
 */
-int EnterSize();
+size_t EnterSize();
 
-/*	\brief Функция сортировки массива (умножение каждого элемента на 3)
-*	\param s Размер массива
-*	\param arr Сортируемый массив
-*	\return Отсортированный массив
+/**
+*@brief Функция вывода массива на экран
+*@param s Размер массива
+*@param array Массив
 */
-void Sorting(int s, int* arr);
+void PrintArray(size_t s, const int* array);
+
+/**
+*@brief Функция сортировки массива (умножение каждого элемента на 3)
+*@param s Размер массива
+*@param arr Сортируемый массив
+*@return Отсортированный массив
+*/
+int* SortArray(size_t s, const int* arr);
+
+/**
+*@brief Функция заполнения массива
+*@param s Размер массива
+*@param minValue Минимальное значение элемента
+*@param maxValue Максимальное значение элемента
+*@return Заполненный массив
+*/
+int* RandomFillArray(size_t s, int minValue, int maxValue);
+
+/**
+*@brief main-функция демонстрации работы программы
+*@return возвращение 0 при успешной работе
+*/
+int main();
 
 int main() {
-    int s = EnterSize();
+    size_t s = EnterSize();
 
 	cout << "Enter minimum value:";
 	int minValue;
@@ -28,43 +52,36 @@ int main() {
 	int maxValue;
 	cin >> maxValue;
 
-	random_device rd;
-	mt19937 gen(rd());
-
-	uniform_int_distribution<int> uniformIntDistribution(minValue, maxValue);
-
-	int* arr = new int[s];
-
-	for (int i = 0; i < s; i++) {
-		arr[i] = uniformIntDistribution(gen);
-	}
+    int* arr = RandomFillArray(s, minValue, maxValue);
 
 	cout << "Array before sorting: \n";
 
-	for (int i = 0; i < s - 1; i++) {
-		cout << arr[i] << ", ";
-	}
+	PrintArray(s, arr);
 
-	cout << arr[s - 1] << ".\n";
-
-	Sorting(s, arr);
+	int* arrayAfterSort = SortArray(s, arr);
 
 	cout << "Array after sorting: \n";
 
-	for (int i = 0; i < s - 1; i++) {
-		cout << arr[i] << ", ";
-	}
+    PrintArray(s, arrayAfterSort);
 
-	cout << arr[s - 1] << ".";
+    if (nullptr != arr)
+    {
+        delete[] arr;
+        arr = nullptr;
+    }
 
-	delete[] arr;
+    if (nullptr != arrayAfterSort)
+    {
+        delete[] arrayAfterSort;
+        arrayAfterSort = nullptr;
+    }
 
 	return 0;
 }
 
-int EnterSize() {
+size_t EnterSize() {
     cout << "Enter size: ";
-    int s;
+    size_t s;
     try {
         cin >> s;
         if (s <= 0) {
@@ -78,8 +95,35 @@ int EnterSize() {
     return s;
 }
 
-void Sorting(int s, int* arr) {
-    for (int i = 0; i < s; i++) {
-        arr[i] = arr[i] * 3;
+int* RandomFillArray(size_t s, int minValue, int maxValue) {
+    random_device rd;
+    mt19937 gen(rd());
+
+    uniform_int_distribution<int> uniformIntDistribution(minValue, maxValue);
+
+    int* arr = new int[s];
+
+    for (size_t i = 0; i < s; i++) {
+        arr[i] = uniformIntDistribution(gen);
     }
+
+    return arr;
+}
+
+int* SortArray(size_t s, const int* arr) {
+    int* array = new int[s];
+
+    for (size_t i = 0; i < s; i++) {
+        array[i] = arr[i] * 3;
+    }
+
+    return array;
+}
+
+void PrintArray(size_t s, const int* array) {
+    for (size_t i = 0; i < s - 1; i++) {
+        cout << array[i] << ", ";
+    }
+
+    cout << array[s - 1] << ".\n";
 }
