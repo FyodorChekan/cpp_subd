@@ -1,26 +1,38 @@
 #include <iostream>
+#include <vector>
 #include "Task2/Headers/HashMap.h"
 
 using namespace std;
 
 int main() {
-    HashMap myHashMap;
+    HashMap<string, int> car;
 
-    myHashMap.Insert(1, 3);
-    myHashMap.Insert(2, 10);
-    myHashMap.Insert(3, 6);
+    car.Insert("Kia", 123);
+    car.Insert("BMW", 420);
+    car.Insert("Tesla", 1020);
 
-    cout << "Value of 1: " << myHashMap.GetValue(1) << endl;
-    cout << "Value of 2: " << myHashMap.GetValue(2) << endl;
-    cout << "Value of 3: " << myHashMap.GetValue(3) << endl;
+    cout << "Value of Kia: " << car.GetValue("Kia") << endl;
+    cout << "Value of BMW: " << car.GetValue("BMW") << endl;
+    cout << "Value of Tesla: " << car.GetValue("Tesla") << endl;
 
-    myHashMap.Insert(4, 11);
-    cout << "Value of 4: " << myHashMap.GetValue(4) << endl;
+    car.Insert("Ford", 100);
+    cout << "Value of Ford: " << car.GetValue("Ford") << endl;
 
-    myHashMap.Remove(2);
+    cout << "Remove value of BMW" << endl;
 
-    cout << "Value of 4 after remove: " << myHashMap.GetValue(2) << endl;
+    car.Remove("BMW");
+
+    cout << "Remove successful" << endl;
+
+    cout << "Updating value of Kia: " << endl;
+
+    car.Update("Kia", 130);
+
+    cout << "Update successful" << endl;
+
+    cout << "Value of Kia after update: " << car.GetValue("Kia") << endl;
+
+    cout << "Value of BMW after remove" << car.GetValue("BMW") << endl;
 
     return 0;
-
 }

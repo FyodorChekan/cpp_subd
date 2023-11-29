@@ -8,14 +8,16 @@
 
 using namespace std;
 
+template <typename keyType, typename valueType>
 class HashMap {
 public:
     HashMap();
     ~HashMap();
-    void Insert(const int &key, const int &value);
-    int GetValue(const int &key);
-    void Remove(const int &key);
+    void Insert(const keyType &key, const valueType &value);
+    void Update(const keyType &key, const valueType &value);
+    valueType GetValue(const keyType &key);
+    void Remove(const keyType &key);
 private:
     int countBuckets;
-    vector<vector<pair<int, int>>> buckets;
+    vector<vector<pair<keyType, valueType>>> buckets;
 };
