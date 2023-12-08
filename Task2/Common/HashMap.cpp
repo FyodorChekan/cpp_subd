@@ -19,8 +19,7 @@ void HashMap<keyType, valueType>::Insert(const keyType &key, const valueType &va
     int hashIndex = hash<keyType>{}(key) % countBuckets;
     for (auto &pair: buckets[hashIndex]) {
         if (pair.first == key) {
-            cout << "Pair already exists, choose update to set new value. \n";
-            return;
+            throw out_of_range("Pair already exists, choose update to set new value. \n");
         }
     }
     buckets[hashIndex].push_back(make_pair(key, value));
@@ -43,14 +42,14 @@ valueType HashMap<keyType, valueType>::GetValue(const keyType &key) {
 template <typename keyType, typename valueType>
 void HashMap<keyType, valueType>::Update(const keyType &key, const valueType &value) {
     int hashIndex = hash<keyType>{}(key) % countBuckets;
+    if (buckets[hashIndex].empty())
+    {
+        throw out_of_range("Pair is not found");
+    }
     for (auto &pair: buckets[hashIndex]) {
         if (pair.first == key) {
             pair.second = value;
             return;
-        }
-        else
-        {
-            throw out_of_range("Pair not found");
         }
     }
 }
