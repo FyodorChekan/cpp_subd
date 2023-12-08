@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "Task2/Headers/HashMap.h"
+#include "../Task2/Common/HashMap.h"
+#include "../Task2/Common/HashMap.cpp"
 
 using namespace std;
 
