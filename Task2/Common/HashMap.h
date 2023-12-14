@@ -16,15 +16,6 @@ public:
 */
     HashMap();
 /**
-* @brief Конструктор копирования.
-* @param t объект HashMap.
-*/
-    HashMap(const HashMap &t);
-/**
-* @brief Деструктор.
-*/
-    ~HashMap();
-/**
 * @brief Метод вставки пары (Ключ, значение).
 * @param key Ключ.
 * @param value Значение.
@@ -52,12 +43,6 @@ public:
 * @return размер HashMap.
 */
     int GetCountBuckets();
-/**
-* @brief Оператор копирования.
-* @param t объект HashMap.
-*/
-    HashMap<keyType, valueType>& operator=(const HashMap<keyType, valueType>& t);
-private:
 /**
 * @brief размер HashMap.
 */
