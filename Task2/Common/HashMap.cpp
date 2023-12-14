@@ -7,12 +7,7 @@ HashMap<keyType, valueType>:: HashMap() {
     buckets.resize(countBuckets);
 }
 
-template <typename keyType, typename valueType>
-HashMap<keyType, valueType>:: ~HashMap() {
-    for (auto &bucket: buckets) {
-        bucket.clear();
-    }
-}
+
 
 template <typename keyType, typename valueType>
 void HashMap<keyType, valueType>::Insert(const keyType &key, const valueType &value) {
@@ -65,20 +60,6 @@ void HashMap<keyType, valueType>::Remove(const keyType &key) {
     }
 }
 
-template<typename keyType, typename valueType>
-HashMap<keyType, valueType>::HashMap(const HashMap &t) {
-    countBuckets = t.countBuckets;
-    buckets = t.buckets;
-}
-
-template<typename keyType, typename valueType>
-HashMap<keyType, valueType> &HashMap<keyType, valueType>::operator=(const HashMap<keyType, valueType> &t) {
-    if (this != &t)
-    {
-        this = HashMap(&t);
-    }
-    return *this;
-}
 
 template<typename keyType, typename valueType>
 int HashMap<keyType, valueType>::GetCountBuckets() {
